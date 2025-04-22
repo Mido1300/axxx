@@ -4,151 +4,46 @@
 @tailwind utilities;
 
 :root {
-  /* Core layout variables */
   --header-height: 64px;
-  
-  /* Modern color scheme with HSL for easier adjustments */
-  --color-primary: 199, 89%, 48%;    /* Vibrant blue */
-  --color-secondary: 262, 83%, 58%;  /* Royal purple */
-  --color-accent: 31, 95%, 58%;      /* Energetic orange */
-  
-  /* Light theme colors */
-  --gradient-light: linear-gradient(135deg, 
-    hsl(203, 94%, 94%) 0%, 
-    hsl(199, 95%, 84%) 25%, 
-    hsl(255, 92%, 95%) 75%, 
-    hsl(262, 83%, 88%) 100%);
-  --bg-light: hsl(0, 0%, 100%);
-  --text-light: hsl(222, 47%, 11%);
-  --border-light: hsl(216, 12%, 92%);
-  --surface-light: hsl(210, 20%, 98%);
-  
-  /* Dark theme colors */
-  --gradient-dark: linear-gradient(135deg, 
-    hsl(222, 47%, 11%) 0%, 
-    hsl(224, 71%, 4%) 25%, 
-    hsl(245, 58%, 15%) 75%, 
-    hsl(246, 50%, 25%) 100%);
-  --bg-dark: hsl(222, 47%, 11%);
-  --text-dark: hsl(210, 20%, 98%);
-  --border-dark: hsl(215, 19%, 35%);
-  --surface-dark: hsl(222, 47%, 11%);
-  
-  /* Animation speeds */
-  --transition-fast: 0.2s;
-  --transition-normal: 0.3s;
-  --transition-slow: 0.5s;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --bg-gradient-light: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 25%, #e2e8f0 75%, #cbd5e1 100%);
+  --bg-gradient-dark: linear-gradient(135deg, #000000 0%, #010616 25%, #1e1b4b 75%, #312e81 100%);
+  --bg-solid-light: #ffffff;
+  --bg-solid-dark: #111827;
 }
 
-/* Base styling */
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   min-height: 100vh;
-  transition: background var(--transition-slow) ease, 
-              color var(--transition-fast) ease;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.5s ease, color 0.2s ease;
 }
 
-/* Theme variants */
 [data-theme="light"] {
-  --bg-color: var(--bg-light);
-  --bg-gradient: var(--gradient-light);
-  --text-color: var(--text-light);
-  --border-color: var(--border-light);
-  --surface-color: var(--surface-light);
-  
+  --bg-color: var(--bg-solid-light);
+  --bg-gradient: var(--bg-gradient-light);
+  --text-color: #111827;
+  --border-color: #e5e7eb;
   background: var(--bg-gradient);
   background-color: var(--bg-color);
   color: var(--text-color);
 }
 
 [data-theme="dark"] {
-  --bg-color: var(--bg-dark);
-  --bg-gradient: var(--gradient-dark);
-  --text-color: var(--text-dark);
-  --border-color: var(--border-dark);
-  --surface-color: var(--surface-dark);
-  
+  --bg-color: var(--bg-solid-dark);
+  --bg-gradient: var(--bg-gradient-dark);
+  --text-color: #f3f4f6;
+  --border-color: #374151;
   background: var(--bg-gradient);
   background-color: var(--bg-color);
   color: var(--text-color);
 }
 
-/* Container utilities */
-.glass-container {
-  backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.75rem;
-  box-shadow: var(--shadow-md);
-}
-
-[data-theme="dark"] .glass-container {
-  background-color: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Button styling */
-.btn {
-  @apply px-4 py-2 rounded-lg font-medium transition-all duration-300;
-}
-.btn-primary {
-  @apply bg-blue-500 text-white hover:bg-blue-600;
-  background-color: hsl(var(--color-primary));
-}
-.btn-secondary {
-  @apply bg-purple-500 text-white hover:bg-purple-600;
-  background-color: hsl(var(--color-secondary));
-}
-.btn-accent {
-  @apply bg-orange-500 text-white hover:bg-orange-600;
-  background-color: hsl(var(--color-accent));
-}
-
 /* Ensure Tailwind dark mode works with data-theme */
 @layer base {
   [data-theme="dark"] .dark\:bg-gray-700 {
-    background-color: var(--surface-dark);
+    background-color: #374151;
   }
   [data-theme="dark"] .dark\:text-white {
-    color: var(--text-dark);
+    color: #ffffff;
   }
-  
-  /* Card elements */
-  .card {
-    @apply rounded-xl p-6 shadow-md transition-all duration-300;
-    background-color: var(--surface-color);
-    border: 1px solid var(--border-color);
-  }
-  
-  /* Interactive elements */
-  .interactive-element {
-    @apply transition-all duration-300 hover:scale-105;
-  }
-  
-  /* Typography enhancements */
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
-  }
-  
-  /* Form elements */
-  input, textarea, select {
-    @apply rounded-lg border p-2 outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300;
-    border-color: var(--border-color);
-  }
-  
-  /* Responsive overrides */
-  @media (max-width: 768px) {
-    :root {
-      --header-height: 56px;
-    }
-  }
+  /* Add other dark mode overrides as needed */
 }
