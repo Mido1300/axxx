@@ -1,12 +1,12 @@
-// app/layout.tsx
-import './globals.css';
+// src/app/layout.tsx
+import '../styles/globals.css'; // Adjust to './globals.css' if in src/app/
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Todo App',
-  description: 'A Next.js todo application',
+  description: 'A Next.js todo application with Tailwind CSS',
 };
 
 export default function RootLayout({
