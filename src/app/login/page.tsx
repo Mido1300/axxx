@@ -1,12 +1,13 @@
-import AuthForm from '@/components/auth/AuthForm';
-import Header from '@/components/Header';
-
-export default function LoginPage() {
+// app/login/page.tsx
+export default function Login() {
   return (
-    <div>
-      <Header />
-      <div className='flex items-center justify-center min-h-[calc(100vh-64px)] p-4'>
-        <AuthForm isLogin />
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold mb-4">Login</h1>
+        <p>Implement your login form here</p>
+        <a href="/" className="btn btn-primary">
+          Back to Home
+        </a>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+// app/page.tsx
 'use client';
 
 import { useAuth } from '@/context/AuthContext';
@@ -20,19 +21,16 @@ export default function Home() {
   const { state, dispatch, canUndo, canRedo } = useTodoContext();
   const [isMounted, setIsMounted] = useState(false);
 
-  // Set mounted state on client-side only
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Handle editingTask state change after mounting
   useEffect(() => {
     if (isMounted && state.editingTask) {
-      setIsFormOpen(true); // Open form when editingTask is set
+      setIsFormOpen(true);
     }
   }, [isMounted, state.editingTask]);
 
-  // Register keyboard shortcuts only after mounting
   useKeyboardShortcuts(
     isMounted
       ? [
@@ -45,21 +43,20 @@ export default function Home() {
 
   usePWA();
 
-  // Render nothing during SSR until mounted
   if (!isMounted) {
-    return null; // Or a minimal placeholder like <div>Loading...</div>
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p>Loading...</p>
+      </div>
+    );
   }
 
-  // After mounting, render based on authentication state
   if (!isAuthenticated) {
     return (
-      <div className='flex items-center justify-center min-h-screen'>
-        <div className='text-center'>
-          <h1 className='text-2xl font-bold mb-4'>Please login to continue</h1>
-          <a
-            href='/login'
-            className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700'
-          >
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Please login to continue</h1>
+          <a href="/login" className="btn btn-primary">
             Go to Login
           </a>
         </div>
@@ -70,27 +67,27 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <main className='container mx-auto p-4'>
-        <div className='flex justify-between items-center mb-4'>
-          <h1 className='text-2xl font-bold text-black dark:text-white'>
+      <main className="container mx-auto p-4">
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold text-black dark:text-white">
             My Tasks
           </h1>
-          <div className='flex space-x-2'>
+          <div className="flex space-x-2">
             <Button
-              variant='text'
+              variant="text"
               onClick={() => dispatch({ type: 'UNDO' })}
               disabled={!canUndo}
-              title='Undo (Ctrl+Z)'
-              className='text-gray-900 dark:text-gray-100'
+              title="Undo (Ctrl+Z)"
+              className="text-gray-900 dark:text-gray-100"
             >
               Undo
             </Button>
             <Button
-              variant='text'
+              variant="text"
               onClick={() => dispatch({ type: 'REDO' })}
               disabled={!canRedo}
-              title='Redo (Ctrl+Y)'
-              className='text-gray-900 dark:text-gray-100'
+              title="Redo (Ctrl+Y)"
+              className="text-gray-900 dark:text-gray-100"
             >
               Redo
             </Button>

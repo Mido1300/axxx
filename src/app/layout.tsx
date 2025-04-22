@@ -1,15 +1,12 @@
-import type { Metadata } from 'next';
+// app/layout.tsx
+import './globals.css';
 import { Inter } from 'next/font/google';
-import '../styles/globals.css';
-import { AuthProvider } from '@/context/AuthContext';
-import { TodoProvider } from '@/context/TodoContext';
-import { ThemeProvider } from '@/context/ThemeContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Todo App',
-  description: 'A simple todo application',
+  description: 'A Next.js todo application',
 };
 
 export default function RootLayout({
@@ -18,16 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' suppressHydrationWarning>
-      <body className={`${inter.className}`}>
-        <ThemeProvider>
-          <AuthProvider>
-            <TodoProvider>
-              <div className='min-h-screen'>{children}</div>
-            </TodoProvider>
-          </AuthProvider>
-        </ThemeProvider>
-      </body>
+    <html lang="en" data-theme="light">
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
